@@ -21,5 +21,8 @@
     "submit-form",
     "form",
     "rill"
-  ]
+  ],
+  "dependencies": {
+    "q-flat": "^0.1.0"
+  }
 }

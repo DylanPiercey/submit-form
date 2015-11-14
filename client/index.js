@@ -1,3 +1,4 @@
+var flat    = require("q-flat");
 var _inputs = [];
 
 // Form used to submit requests.
@@ -43,7 +44,7 @@ function submitForm (action, opts) {
  * @param {Object} [body] - the body of the form. (Will clear inputs without.)
  */
 function buildForm (body) {
-	body    = body || {};
+	body    = flat(body || {});
 	var cur = 0;
 	// Create inputs for each value.
 	for (var key in body) if (body[key] != null) buildInput(cur++, key, body[key]);
