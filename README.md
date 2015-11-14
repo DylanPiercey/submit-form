@@ -21,6 +21,9 @@ submit("/my-form", {
 	method: "POST",
 	body: { a: 1 }
 });
+
+// Basically the same as clicking a link.
+submit("/my-page");
 ```
 
 # API Options / Defaults.
