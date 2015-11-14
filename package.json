@@ -1,0 +1,28 @@
+{
+  "name": "submit-form",
+  "version": "0.1.0",
+  "description": "Utility to easily submit forms in the browser.",
+  "author": "Dylan Piercey <pierceydylan@gmail.com>",
+  "main": "server/index.js",
+  "browser": "client/index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DylanPiercey/submit-form"
+  },
+  "keywords": [
+    "universal",
+    "isomorphic",
+    "link",
+    "a",
+    "goto",
+    "navigate",
+    "submit",
+    "submit-form",
+    "form",
+    "rill"
+  ],
+  "dependencies": {
+    "q-set": "^0.1.6"
+  }
+}
