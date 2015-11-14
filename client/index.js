@@ -1,8 +1,16 @@
-var flat    = require("q-flat");
-var form    = document.createElement("form");
 var _inputs = [];
 
-module.exports = submit;
+// Form used to submit requests.
+var form   = document.createElement("form");
+var button = document.createElement("button");
+
+// Hide form.
+button.type        = "submit";
+form.style.display = "none";
+
+// Add to dom.
+form.appendChild(button);
+document.body.appendChild(form);
 
 /**
  * Updates the hidden form based on arguments and submits it.
@@ -10,16 +18,23 @@ module.exports = submit;
  * @param {String} action - the action for the form.
  * @param {Object} [opts] - the form attributes.
  */
-function submit (action, opts) {
+function submitForm (action, opts) {
 	if (typeof action !== "string") throw new TypeError("Form action must be a string!");
 
+	// Apply default options.
 	opts         = opts || {};
 	form.action  = action;
 	form.method  = (opts.method || "GET").toUpperCase();
-	form.enctype = opts.enctype || "application/x-www-form-urlencoded";
-	form.target  = opts.target || "_self";
+	form.enctype = opts.enctype || form.enctype;
+	form.target  = opts.target || form.target;
 	buildForm(opts.body);
-	form.submit();
+
+	// Trigger form submit in a way that allows submission to be intercepted.
+	button.dispatchEvent(new MouseEvent("click", {
+		bubbles: true,
+		cancelable: true,
+		view: window
+	}));
 }
 
 /**
@@ -28,7 +43,7 @@ function submit (action, opts) {
  * @param {Object} [body] - the body of the form. (Will clear inputs without.)
  */
 function buildForm (body) {
-	body    = flat(body || {});
+	body    = body || {};
 	var cur = 0;
 	// Create inputs for each value.
 	for (var key in body) if (body[key] != null) buildInput(cur++, key, body[key]);
@@ -48,3 +63,5 @@ function buildInput (i, name, value) {
 	input.name  = name;
 	input.value = value;
 }
+
+module.exports = submitForm;
