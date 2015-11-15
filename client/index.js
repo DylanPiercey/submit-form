@@ -4,14 +4,9 @@ var _inputs = [];
 // Form used to submit requests.
 var form   = document.createElement("form");
 var button = document.createElement("button");
-
-// Hide form.
 button.type        = "submit";
 form.style.display = "none";
-
-// Add to dom.
 form.appendChild(button);
-document.body.appendChild(form);
 
 /**
  * Updates the hidden form based on arguments and submits it.
@@ -30,12 +25,14 @@ function submitForm (action, opts) {
 	form.target  = opts.target || form.target;
 	buildForm(opts.body);
 
+	document.body.appendChild(form);
 	// Trigger form submit in a way that allows submission to be intercepted.
 	button.dispatchEvent(new MouseEvent("click", {
 		bubbles: true,
 		cancelable: true,
 		view: window
 	}));
+	document.body.removeChild(form);
 }
 
 /**
