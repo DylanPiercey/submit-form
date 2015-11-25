@@ -22,6 +22,12 @@ submit("/my-form", {
 	body: { a: 1 }
 });
 
+// Submit a different form.
+submit("/my-other-form", {
+	method: "POST",
+	body: document.getElementById("my-form")
+});
+
 // Basically the same as clicking a link.
 submit("/my-page");
 ```
