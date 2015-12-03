@@ -1,5 +1,5 @@
-var flat    = require("q-flat");
 var parse   = require("parse-form");
+var flat    = require("q-flat");
 var _inputs = [];
 
 // Form used to submit requests.
@@ -26,7 +26,10 @@ function submitForm (action, opts) {
 	form.target  = opts.target || form.target;
 
 	var body = opts.body;
-	buildForm(body && body.nodeName === "FORM" ? parse(body).body : body);
+	buildForm(body && body.nodeName === "FORM"
+		? parse(body, true).body
+		: flat(body)
+	);
 
 	document.body.appendChild(form);
 	// Trigger form submit in a way that allows submission to be intercepted.
@@ -44,7 +47,7 @@ function submitForm (action, opts) {
  * @param {Object} [body] - the body of the form. (Will clear inputs without.)
  */
 function buildForm (body) {
-	body    = flat(body || {});
+	body    = body || {};
 	var cur = 0;
 	// Create inputs for each value.
 	for (var key in body) if (body[key] != null) buildInput(cur++, key, body[key]);
