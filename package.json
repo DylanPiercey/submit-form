@@ -1,6 +1,6 @@
 {
   "name": "submit-form",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Utility to easily submit forms in the browser.",
   "author": "Dylan Piercey <pierceydylan@gmail.com>",
   "main": "server/index.js",
@@ -23,7 +23,7 @@
     "rill"
   ],
   "dependencies": {
-    "parse-form": "^1.1.0",
-    "q-flat": "^0.1.0"
+    "parse-form": "^1.1.1",
+    "q-flat": "^0.2.0"
   }
 }
