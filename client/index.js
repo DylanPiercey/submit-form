@@ -12,10 +12,15 @@ form.appendChild(button);
 /**
  * Updates the hidden form based on arguments and submits it.
  *
- * @param {String} action - the action for the form.
+ * @param {String} [action] - the action for the form.
  * @param {Object} [opts] - the form attributes.
  */
 function submitForm (action, opts) {
+	if (typeof action === "object") {
+		// Make action optional.
+		opts   = action;
+		action = "";
+	}
 	if (typeof action !== "string") throw new TypeError("Form action must be a string!");
 
 	// Apply default options.

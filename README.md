@@ -30,6 +30,12 @@ submit("/my-other-form", {
 
 // Basically the same as clicking a link.
 submit("/my-page");
+
+// Alternatively you can submit to the current page.
+submit({
+	method: "POST",
+	body: document.getElementById("my-form")
+});
 ```
 
 # API Options / Defaults.
