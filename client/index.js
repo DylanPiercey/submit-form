@@ -24,11 +24,11 @@ function submitForm (action, opts) {
 	if (typeof action !== "string") throw new TypeError("Form action must be a string!");
 
 	// Apply default options.
-	opts         = opts || {};
-	form.action  = action;
-	form.method  = (opts.method || "GET").toUpperCase();
-	form.enctype = opts.enctype || form.enctype;
-	form.target  = opts.target || form.target;
+	opts = opts || {};
+	form.setAttribute("action", action || "");
+	form.setAttribute("method", (opts.method || "GET").toUpperCase());
+	form.setAttribute("enctype", opts.enctype || form.enctype || "application/x-www-form-urlencoded");
+	form.setAttribute("target", opts.target || form.target || "_self");
 
 	var body = opts.body;
 	buildForm(body && body.nodeName === "FORM"
@@ -38,11 +38,10 @@ function submitForm (action, opts) {
 
 	document.body.appendChild(form);
 	// Trigger form submit in a way that allows submission to be intercepted.
-	button.dispatchEvent(new MouseEvent("click", {
-		bubbles: true,
-		cancelable: true,
-		view: window
-	}));
+	var event = document.createEvent("Event");
+	event.initEvent("click", true, true, window, 1);
+	button.dispatchEvent(event);
+	// Clean up form from body.
 	document.body.removeChild(form);
 }
 
