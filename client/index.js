@@ -8,6 +8,7 @@ var button = document.createElement("button");
 button.type        = "submit";
 form.style.display = "none";
 form.appendChild(button);
+document.body.appendChild(form);
 
 /**
  * Updates the hidden form based on arguments and submits it.
@@ -36,13 +37,10 @@ function submitForm (action, opts) {
 		: flat(body)
 	);
 
-	document.body.appendChild(form);
 	// Trigger form submit in a way that allows submission to be intercepted.
 	var event = document.createEvent("Event");
 	event.initEvent("click", true, true, window, 1);
 	button.dispatchEvent(event);
-	// Clean up form from body.
-	document.body.removeChild(form);
 }
 
 /**
@@ -56,7 +54,11 @@ function buildForm (body) {
 	// Create inputs for each value.
 	for (var key in body) if (body[key] != null) buildInput(cur++, key, body[key]);
 	// Clear out unused inputs.
-	for (var i = _inputs.length; i-- > cur;) _inputs[i].name = undefined;
+	for (var input, i = _inputs.length; i-- > cur;) {
+		input = _inputs[i];
+		input.removeAttribute("name");
+		input.removeAttribute("value");
+	}
 }
 
 /**
@@ -68,8 +70,8 @@ function buildForm (body) {
  */
 function buildInput (i, name, value) {
 	var input   = _inputs[i] || form.appendChild(_inputs[i] = document.createElement("input"));
-	input.name  = name;
-	input.value = value;
+	input.setAttribute("name", name);
+	input.setAttribute("value", value);
 }
 
 module.exports = submitForm;
