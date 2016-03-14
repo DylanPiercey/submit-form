@@ -20,7 +20,7 @@ function submitForm (action, opts) {
 	if (typeof action === "object") {
 		// Make action optional.
 		opts   = action;
-		action = null;
+		action = "";
 	}
 	if (typeof action !== "string") throw new TypeError("Form action must be a string!");
 
