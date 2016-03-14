@@ -20,13 +20,13 @@ function submitForm (action, opts) {
 	if (typeof action === "object") {
 		// Make action optional.
 		opts   = action;
-		action = "";
+		action = null;
 	}
 	if (typeof action !== "string") throw new TypeError("Form action must be a string!");
 
 	// Apply default options.
 	opts = opts || {};
-	form.setAttribute("action", action || "");
+	form.setAttribute("action", action || window.location.href);
 	form.setAttribute("method", (opts.method || "GET").toUpperCase());
 	form.setAttribute("enctype", opts.enctype || form.enctype || "application/x-www-form-urlencoded");
 	form.setAttribute("target", opts.target || form.target || "_self");
