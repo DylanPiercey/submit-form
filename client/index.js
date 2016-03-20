@@ -3,12 +3,11 @@ var flat    = require("q-flat");
 var _inputs = [];
 
 // Form used to submit requests.
-var form   = document.createElement("form");
-var button = document.createElement("button");
+var form           = document.createElement("form");
+var button         = document.createElement("button");
 button.type        = "submit";
 form.style.display = "none";
 form.appendChild(button);
-document.body.appendChild(form);
 
 /**
  * Updates the hidden form based on arguments and submits it.
@@ -38,9 +37,11 @@ function submitForm (action, opts) {
 	);
 
 	// Trigger form submit in a way that allows submission to be intercepted.
+	document.body.appendChild(form);
 	var event = document.createEvent("Event");
 	event.initEvent("click", true, true, window, 1);
 	button.dispatchEvent(event);
+	document.body.removeChild(form);
 }
 
 /**
