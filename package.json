@@ -1,6 +1,6 @@
 {
   "name": "submit-form",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Utility to easily submit forms in the browser.",
   "author": "Dylan Piercey <pierceydylan@gmail.com>",
   "main": "server/index.js",
