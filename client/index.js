@@ -59,8 +59,8 @@ function buildForm (body) {
   // Clear out unused inputs.
   for (var input, i = _inputs.length; i-- > cur;) {
     input = _inputs[i]
-    input.removeAttribute('name')
-    input.removeAttribute('value')
+    input.name = undefined
+    input.value = undefined
   }
 }
 
@@ -72,9 +72,9 @@ function buildForm (body) {
  * @param {*} value - the value for the input.
  */
 function buildInput (i, name, value) {
-  var input = _inputs[i] || form.appendChild(_inputs[i] = document.createElement('input'))
-  input.setAttribute('name', name)
-  input.setAttribute('value', value)
+  var input = _inputs[i] || form.appendChild(_inputs[i] = document.createElement('textarea'))
+  input.name = name
+  input.value = value
 }
 
 module.exports = submitForm
